@@ -16,3 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return Inertia\Inertia::render('Welcome');
 });
+
+Route::post('login', App\Http\Controllers\LoginController::class)->name('login');
+
+Route::get('profile', function () {
+
+})->name('profile');
