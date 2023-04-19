@@ -65,6 +65,18 @@ class LoginTest extends TestCase
             'password' => '1234',
         ]);
 
-        $response->assertRedirectToRoute('login');
+        $response->assertRedirectToRoute('login')
+            ->assertInvalid(['email' => 'These credentials do not match our records.']);
+    }
+
+    public function test_a_user_logged_in_cannot_access_the_login_page(): void
+    {
+        $user = User::factory()->create([
+            'email' => 'test@example.com',
+            'password' => Hash::make('1234'),
+        ]);
+        $response = $this->actingAs($user)->get('/login');
+
+        $response->assertRedirect();
     }
 }

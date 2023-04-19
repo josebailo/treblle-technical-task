@@ -19,6 +19,8 @@ class LoginController extends Controller
             return redirect()->route('profile');
         }
 
-        return redirect()->back();
+        return back()->withErrors([
+            'email' => __('auth.failed'),
+        ]);
     }
 }

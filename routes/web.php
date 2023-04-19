@@ -17,6 +17,9 @@ Route::get('/', function () {
     return Inertia\Inertia::render('Welcome');
 });
 
+Route::get('login', function () {
+    return Inertia\Inertia::render('Login');
+})->middleware('guest');
 Route::post('login', App\Http\Controllers\LoginController::class)->name('login');
 
 Route::get('profile', function () {
