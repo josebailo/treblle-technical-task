@@ -75,8 +75,19 @@ class LoginTest extends TestCase
             'email' => 'test@example.com',
             'password' => Hash::make('1234'),
         ]);
-        $response = $this->actingAs($user)->get('/login');
+        $response = $this->actingAs($user)->get(route('login'));
 
-        $response->assertRedirect();
+        $response->assertRedirectToRoute('home');
+    }
+
+    public function test_a_user_logged_in_cannot_send_a_post_request_to_do_login(): void
+    {
+        $user = User::factory()->create([
+            'email' => 'test@example.com',
+            'password' => Hash::make('1234'),
+        ]);
+        $response = $this->actingAs($user)->post('/login');
+
+        $response->assertRedirectToRoute('home');
     }
 }

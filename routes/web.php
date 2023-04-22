@@ -15,12 +15,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return Inertia\Inertia::render('Welcome');
-});
+})->name('home');
 
 Route::get('login', function () {
     return Inertia\Inertia::render('Login');
-})->middleware('guest');
-Route::post('login', App\Http\Controllers\LoginController::class)->name('login');
+})->name('login')->middleware('guest');
+
+Route::post('login', App\Http\Controllers\LoginController::class)->middleware('guest');
 
 Route::get('profile', function () {
 
