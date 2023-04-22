@@ -23,6 +23,10 @@ Route::get('login', function () {
 
 Route::post('login', App\Http\Controllers\LoginController::class)->middleware('guest');
 
+Route::post('logout', App\Http\Controllers\LogoutController::class)
+    ->name('logout')
+    ->middleware('auth');
+
 Route::get('profile', function () {
 
 })->name('profile');
