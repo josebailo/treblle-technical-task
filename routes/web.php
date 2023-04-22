@@ -27,6 +27,12 @@ Route::post('logout', App\Http\Controllers\LogoutController::class)
     ->name('logout')
     ->middleware('auth');
 
+Route::get('register', function () {
+    return Inertia\Inertia::render('Registration');
+})->name('register')->middleware('guest');
+
+Route::post('register', App\Http\Controllers\RegisterController::class);
+
 Route::get('profile', function () {
 
 })->name('profile');
