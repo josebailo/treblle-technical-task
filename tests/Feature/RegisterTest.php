@@ -63,6 +63,14 @@ class RegisterTest extends TestCase
             ->assertInvalid(['email' => 'The email field is required.']);
     }
 
+    public function test_email_must_be_a_valid_email(): void
+    {
+        $response = $this->from('/register')->post('/register', ['email' => 'test']);
+
+        $response->assertRedirectToRoute('register')
+            ->assertInvalid(['email' => 'The email field must be a valid email address.']);
+    }
+
     public function test_password_is_required(): void
     {
         $response = $this->from('/register')->post('/register');
