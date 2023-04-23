@@ -34,7 +34,7 @@ Route::get('register', function () {
 Route::post('register', App\Http\Controllers\RegisterController::class);
 
 Route::get('profile', function () {
-
+    return Inertia\Inertia::render('Profile');
 })->name('profile')->middleware('auth');
 
 Route::post('profile', App\Http\Controllers\ProfileController::class)->middleware('auth');
