@@ -1,5 +1,7 @@
 <script setup lang="ts">
+  import Button from '../Components/Forms/Button.vue'
   import Error from '../Components/Forms/Error.vue'
+  import Form from '../Components/Forms/Form.vue'
   import Input from '../Components/Forms/Input.vue'
   import { useForm } from '@inertiajs/vue3'
 
@@ -16,7 +18,7 @@
 </script>
 
 <template>
-  <form @submit.prevent="submit" class="bg-white w-full max-w-sm m-auto p-5 rounded-md border border-gray-300 shadow-sm">
+  <Form @submit.prevent="submit">
     <div>
       <label for="name" class="block">Name</label>
       <Input type="text" id="name" v-model="form.name" class="mt-2" required />
@@ -38,7 +40,7 @@
       <Error v-if="form.errors.password_confirmation" class="mt-2">{{ form.errors.password_confirmation }}</Error>
     </div>
     <div class="mt-5 text-right">
-      <button type="submit" class="px-4 py-2 rounded-md bg-blue-600 text-white shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 focus:ring-offset-2">Sign up</button>
+      <Button type="submit">Sign up</Button>
     </div>
-  </form>
+  </Form>
 </template>
