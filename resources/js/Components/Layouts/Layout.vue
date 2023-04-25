@@ -16,6 +16,7 @@
       <div class="flex items-center gap-4">
         <template v-if="user">
           <Link href="/profile">Profile</Link>
+          <Link href="/password">Change password</Link>
           <Link href="/logout" method="post" as="button">Logout</Link>
         </template>
         <template v-else>

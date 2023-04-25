@@ -38,3 +38,9 @@ Route::get('profile', function () {
 })->name('profile')->middleware('auth');
 
 Route::post('profile', App\Http\Controllers\ProfileController::class)->middleware('auth');
+
+Route::get('password', function () {
+    return Inertia\Inertia::render('UpdatePassword');
+})->name('password')->middleware('auth');
+
+Route::post('password', App\Http\Controllers\PasswordController::class)->middleware('auth');
