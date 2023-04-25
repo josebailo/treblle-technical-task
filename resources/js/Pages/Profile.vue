@@ -1,13 +1,16 @@
 <script setup lang="ts">
   import Error from '../Components/Forms/Error.vue'
   import Input from '../Components/Forms/Input.vue'
-  import { useForm, usePage } from '@inertiajs/vue3'
+  import { useForm } from '@inertiajs/vue3'
+  import { User } from '../types'
 
-  const page = usePage()
+  const { user } = defineProps<{
+    user: User
+  }>()
 
   const form = useForm({
-    name: page.props.auth.user.name,
-    email: page.props.auth.user.email,
+    name: user.name,
+    email: user.email,
   })
 
   const submit = () => {

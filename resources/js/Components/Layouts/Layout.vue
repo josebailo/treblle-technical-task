@@ -1,8 +1,10 @@
 <script setup lang="ts">
-  import { Link, usePage } from '@inertiajs/vue3'
-  import { computed } from 'vue'
+  import { Link } from '@inertiajs/vue3'
+  import { User } from '../../types'
 
-  const user = computed(() => usePage()?.props?.auth?.user)
+  const { user } = defineProps<{
+    user: User
+  }>()
 </script>
 
 <template>

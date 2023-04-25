@@ -1,4 +1,12 @@
+<script setup lang="ts">
+  import { User } from '../types'
+
+  defineProps<{
+    user?: User
+  }>()
+</script>
+
 <template>
-  <p v-if="$page.props.auth.user">Hello {{ $page.props.auth.user.name }}!</p>
+  <p v-if="user">Hello {{ user.name }}!</p>
   <p v-else>Please, do login or register yourself!</p>
 </template>

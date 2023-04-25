@@ -7,38 +7,49 @@ describe('Profile component', () => {
         cleanup()
     })
 
-    // TODO find out how to mock the properties that came from laravel
-    test.skip('does not allow to do submit until the fields are filled', async () => {
+    test('does not allow to do submit until the fields are filled', async () => {
         const mockSubmit = vi.fn()
         render(Profile, {
+            props: {
+                user: {
+                    name: 'John Doe',
+                    email: 'test@example.com',
+                },
+            },
             global: {
                 mocks: {
-                    $page: {
-                        props: {
-                            auth: {
-                                user: {
-                                    name: 'John Doe',
-                                    email: 'test@example.com',
-                                },
-                            },
-                        },
-                    },
                     submit: mockSubmit,
                 },
             },
         })
         const submitButton = screen.getByText(/update/i)
+        const nameInput = screen.getByLabelText(/name/i)
+        const emailInput = screen.getByLabelText(/email/i)
+
+        await fireEvent.update(nameInput, '')
+        await fireEvent.update(emailInput, '')
         await fireEvent.click(submitButton)
         expect(mockSubmit).not.toHaveBeenCalled()
 
-        const nameInput = screen.getByLabelText(/name/i)
         await fireEvent.update(nameInput, 'John Doe')
         await fireEvent.click(submitButton)
         expect(mockSubmit).not.toHaveBeenCalled()
 
-        const emailInput = screen.getByLabelText(/email/i)
         await fireEvent.update(emailInput, 'test@example.com')
         await fireEvent.click(submitButton)
         expect(mockSubmit).toHaveBeenCalled()
+    })
+
+    test('have the fields already filled with the user data', async () => {
+        render(Profile, {
+            props: {
+                user: {
+                    name: 'John Doe',
+                    email: 'test@example.com',
+                },
+            },
+        })
+        expect(screen.getByLabelText(/name/i).value).toBe('John Doe')
+        expect(screen.getByLabelText(/email/i).value).toBe('test@example.com')
     })
 })
