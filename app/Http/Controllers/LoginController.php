@@ -10,12 +10,13 @@ class LoginController extends Controller
 {
     public function __invoke(Request $request): RedirectResponse
     {
-        $data = $request->validate([
+        $request->validate([
             'email' => 'required|email',
             'password' => 'required|string',
+            'remember' => 'nullable|boolean',
         ]);
 
-        if (Auth::attempt($data)) {
+        if (Auth::attempt($request->only('email', 'password'), $request->remember)) {
             return redirect()->route('profile');
         }
 
