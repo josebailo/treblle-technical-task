@@ -10,6 +10,6 @@ class CreateController extends Controller
 {
     public function __invoke(): Response
     {
-        return Inertia::render('Registration');
+        return Inertia::render('SignUp');
     }
 }

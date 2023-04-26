@@ -10,6 +10,6 @@ class EditController extends Controller
 {
     public function __invoke(): Response
     {
-        return Inertia::render('UpdatePassword');
+        return Inertia::render('Password');
     }
 }
