@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Web\Authentication;
+namespace App\Http\Controllers\Web\SignUp;
 
 use App\Http\Controllers\Controller;
 use Inertia\Inertia;
 use Inertia\Response;
 
-class ShowLoginController extends Controller
+class CreateController extends Controller
 {
     public function __invoke(): Response
     {
-        return Inertia::render('Login');
+        return Inertia::render('Registration');
     }
 }

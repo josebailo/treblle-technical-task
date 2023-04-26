@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Web\Authentication;
+namespace App\Http\Controllers\Web\SignUp;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class RegisterController extends Controller
+class PostController extends Controller
 {
     public function __invoke(Request $request): RedirectResponse
     {

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Web\Authentication;
+namespace App\Http\Controllers\Web\SignIn;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 
-class LogoutController extends Controller
+class DeleteController extends Controller
 {
     public function __invoke(): RedirectResponse
     {
