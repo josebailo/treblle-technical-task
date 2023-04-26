@@ -2,45 +2,30 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
 Route::get('/', function () {
     return Inertia\Inertia::render('Welcome');
 })->name('home');
 
-Route::get('login', function () {
-    return Inertia\Inertia::render('Login');
-})->name('login')->middleware('guest');
+Route::namespace('App\Http\Controllers\Web\Authentication')->group(function () {
+    Route::middleware('guest')->group(function () {
+        Route::get('login', ShowLoginController::class)->name('login');
+        Route::post('login', LoginController::class);
 
-Route::post('login', App\Http\Controllers\LoginController::class)->middleware('guest');
+        Route::get('register', ShowRegisterController::class)->name('register');
+        Route::post('register', RegisterController::class);
+    });
 
-Route::post('logout', App\Http\Controllers\LogoutController::class)
-    ->name('logout')
-    ->middleware('auth');
+    Route::post('logout', LogoutController::class)->name('logout')->middleware('auth');
+});
 
-Route::get('register', function () {
-    return Inertia\Inertia::render('Registration');
-})->name('register')->middleware('guest');
+Route::middleware('auth')->group(function () {
+    Route::namespace('App\Http\Controllers\Web\Profile')->group(function () {
+        Route::get('profile', EditController::class)->name('profile');
+        Route::post('profile', UpdateController::class);
+    });
 
-Route::post('register', App\Http\Controllers\RegisterController::class);
-
-Route::get('profile', function () {
-    return Inertia\Inertia::render('Profile');
-})->name('profile')->middleware('auth');
-
-Route::post('profile', App\Http\Controllers\ProfileController::class)->middleware('auth');
-
-Route::get('password', function () {
-    return Inertia\Inertia::render('UpdatePassword');
-})->name('password')->middleware('auth');
-
-Route::post('password', App\Http\Controllers\PasswordController::class)->middleware('auth');
+    Route::namespace('App\Http\Controllers\Web\Password')->group(function () {
+        Route::get('password', EditController::class)->name('password');
+        Route::post('password', UpdateController::class);
+    });
+});
