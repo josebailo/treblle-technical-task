@@ -13,7 +13,7 @@
   })
 
   const submit = () => {
-    form.post('login')
+    form.post('signin')
   }
 </script>
 

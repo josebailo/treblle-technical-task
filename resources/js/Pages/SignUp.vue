@@ -13,7 +13,7 @@
   })
 
   const submit = () => {
-    form.post('register')
+    form.post('signup')
   }
 </script>
 

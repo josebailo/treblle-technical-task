@@ -11,9 +11,9 @@ class SignUpTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_a_guest_can_register(): void
+    public function test_a_guest_can_sign_up(): void
     {
-        $response = $this->post('/register', [
+        $response = $this->post('/signup', [
             'name' => 'John Doe',
             'email' => 'test@example.com',
             'password' => '1234',
@@ -25,76 +25,76 @@ class SignUpTest extends TestCase
         $this->assertAuthenticatedAs($user);
     }
 
-    public function test_a_user_logged_in_cannot_access_the_register_page(): void
+    public function test_a_user_logged_in_cannot_access_the_sign_up_page(): void
     {
         $user = User::factory()->create([
             'email' => 'test@example.com',
             'password' => Hash::make('1234'),
         ]);
-        $response = $this->actingAs($user)->get(route('register'));
+        $response = $this->actingAs($user)->get(route('signup'));
 
         $response->assertRedirectToRoute('home');
     }
 
-    public function test_a_user_logged_in_cannot_send_a_post_request_to_do_register(): void
+    public function test_a_user_logged_in_cannot_send_a_post_request_to_do_sign_up(): void
     {
         $user = User::factory()->create([
             'email' => 'test@example.com',
             'password' => Hash::make('1234'),
         ]);
-        $response = $this->actingAs($user)->post('/register');
+        $response = $this->actingAs($user)->post('/signup');
 
         $response->assertRedirectToRoute('home');
     }
 
     public function test_name_is_required(): void
     {
-        $response = $this->from('/register')->post('/register');
+        $response = $this->from('/signup')->post('/signup');
 
-        $response->assertRedirectToRoute('register')
+        $response->assertRedirectToRoute('signup')
             ->assertInvalid(['name' => 'The name field is required.']);
     }
 
     public function test_email_is_required(): void
     {
-        $response = $this->from('/register')->post('/register');
+        $response = $this->from('/signup')->post('/signup');
 
-        $response->assertRedirectToRoute('register')
+        $response->assertRedirectToRoute('signup')
             ->assertInvalid(['email' => 'The email field is required.']);
     }
 
     public function test_email_must_be_a_valid_email(): void
     {
-        $response = $this->from('/register')->post('/register', ['email' => 'test']);
+        $response = $this->from('/signup')->post('/signup', ['email' => 'test']);
 
-        $response->assertRedirectToRoute('register')
+        $response->assertRedirectToRoute('signup')
             ->assertInvalid(['email' => 'The email field must be a valid email address.']);
     }
 
     public function test_password_is_required(): void
     {
-        $response = $this->from('/register')->post('/register');
+        $response = $this->from('/signup')->post('/signup');
 
-        $response->assertRedirectToRoute('register')
+        $response->assertRedirectToRoute('signup')
             ->assertInvalid(['password' => 'The password field is required.']);
     }
 
     public function test_password_confirmation_is_required(): void
     {
-        $response = $this->from('/register')->post('/register');
+        $response = $this->from('/signup')->post('/signup');
 
-        $response->assertRedirectToRoute('register')
+        $response->assertRedirectToRoute('signup')
             ->assertInvalid(['password_confirmation' => 'The password confirmation field is required.']);
     }
 
     public function test_password_confirmation_must_be_equal_than_the_password(): void
     {
-        $response = $this->from('/register')->post('/register', [
+        $response = $this->from('/signup')->post('/signup', [
             'password' => '1234',
             'password_confirmation' => '1111',
         ]);
 
-        $response->assertRedirectToRoute('register')
+        $response->assertRedirectToRoute('signup')
             ->assertInvalid(['password' => 'The password field confirmation does not match.']);
     }
 
@@ -104,14 +104,14 @@ class SignUpTest extends TestCase
             'email' => 'test@example.com',
         ]);
 
-        $response = $this->from('/register')->post('/register', [
+        $response = $this->from('/signup')->post('/signup', [
             'name' => 'John Doe',
             'email' => 'test@example.com',
             'password' => '1234',
             'password_confirmation' => '1234',
         ]);
 
-        $response->assertRedirectToRoute('register')
+        $response->assertRedirectToRoute('signup')
             ->assertInvalid(['email' => 'The email has already been taken.']);
     }
 }

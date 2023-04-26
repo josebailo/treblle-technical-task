@@ -91,13 +91,13 @@ class ProfileTest extends TestCase
     {
         $response = $this->get(route('profile'));
 
-        $response->assertRedirectToRoute('login');
+        $response->assertRedirectToRoute('signin');
     }
 
     public function test_only_logged_users_can_update_the_profile(): void
     {
         $response = $this->post('/profile');
 
-        $response->assertRedirectToRoute('login');
+        $response->assertRedirectToRoute('signin');
     }
 }

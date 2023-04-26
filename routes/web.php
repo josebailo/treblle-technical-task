@@ -8,16 +8,16 @@ Route::get('/', function () {
 
 Route::namespace(App\Http\Controllers\Web\SignIn::class)->group(function () {
     Route::middleware('guest')->group(function () {
-        Route::get('login', CreateController::class)->name('login');
-        Route::post('login', PostController::class);
+        Route::get('signin', CreateController::class)->name('signin');
+        Route::post('signin', PostController::class);
     });
 
-    Route::post('logout', DeleteController::class)->name('logout')->middleware('auth');
+    Route::post('signout', DeleteController::class)->name('signout')->middleware('auth');
 });
 
 Route::middleware('guest')->namespace(App\Http\Controllers\Web\SignUp::class)->group(function () {
-    Route::get('register', CreateController::class)->name('register');
-    Route::post('register', PostController::class);
+    Route::get('signup', CreateController::class)->name('signup');
+    Route::post('signup', PostController::class);
 });
 
 Route::middleware('auth')->group(function () {
