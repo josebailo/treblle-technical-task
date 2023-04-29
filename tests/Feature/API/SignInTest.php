@@ -4,6 +4,7 @@ namespace Tests\Feature\API;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\Response;
 use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
@@ -69,5 +70,21 @@ class SignInTest extends TestCase
         Sanctum::actingAs(User::factory()->create());
         $response = $this->postJson('/api/signin');
         $response->assertRedirectToRoute('home');
+    }
+
+    public function test_a_logged_user_can_sign_out(): void
+    {
+        Sanctum::actingAs(User::factory()->create());
+        $response = $this->postJson('/api/signout');
+
+        $response->assertStatus(Response::HTTP_NO_CONTENT);
+        $this->refreshApplication();
+        $this->assertGuest();
+    }
+
+    public function test_a_guest_cannot_sign_out(): void
+    {
+        $response = $this->postJson('/api/signout');
+        $response->assertStatus(Response::HTTP_UNAUTHORIZED);
     }
 }
