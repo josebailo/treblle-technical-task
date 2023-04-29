@@ -25,7 +25,7 @@ class ProfileTest extends TestCase
         ]);
         $userAfter = User::first();
 
-        $response->assertRedirectToRoute('profile');
+        $response->assertStatus(Response::HTTP_OK);
         $this->assertEquals('Jane Doe', $userAfter->name);
         $this->assertEquals('new-test@example.com', $userAfter->email);
         $this->assertEquals($userBefore->password, $userAfter->password);
@@ -44,7 +44,7 @@ class ProfileTest extends TestCase
         ]);
         $userAfter = User::first();
 
-        $response->assertRedirectToRoute('profile');
+        $response->assertStatus(Response::HTTP_OK);
         $this->assertEquals($userBefore->name, $userAfter->name);
         $this->assertEquals($userBefore->email, $userAfter->email);
         $this->assertEquals($userBefore->password, $userAfter->password);
