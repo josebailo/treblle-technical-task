@@ -69,7 +69,7 @@ class SignInTest extends TestCase
     {
         Sanctum::actingAs(User::factory()->create());
         $response = $this->postJson('/api/signin');
-        $response->assertRedirectToRoute('home');
+        $response->assertStatus(Response::HTTP_UNAUTHORIZED);
     }
 
     public function test_a_logged_user_can_sign_out(): void
