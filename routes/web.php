@@ -12,7 +12,7 @@ Route::namespace(App\Http\Controllers\Web\SignIn::class)->group(function () {
         Route::post('signin', PostController::class);
     });
 
-    Route::post('signout', DeleteController::class)->name('signout')->middleware('auth');
+    Route::post('signout', DestroyController::class)->name('signout')->middleware('auth');
 });
 
 Route::middleware('guest')->namespace(App\Http\Controllers\Web\SignUp::class)->group(function () {
