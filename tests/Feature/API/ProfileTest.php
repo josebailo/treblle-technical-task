@@ -54,7 +54,7 @@ class ProfileTest extends TestCase
     {
         [$userA, $userB] = User::factory()->count(2)->create();
         Sanctum::actingAs($userA);
-        $response = $this->from('profile')->postJson('/api/profile', [
+        $response = $this->postJson('/api/profile', [
             'name' => $userA->name,
             'email' => $userB->email,
         ]);
@@ -65,7 +65,7 @@ class ProfileTest extends TestCase
     public function test_name_is_required(): void
     {
         Sanctum::actingAs(User::factory()->create());
-        $response = $this->from('/profile')->postJson('/api/profile');
+        $response = $this->postJson('/api/profile');
 
         $response->assertInvalid(['name' => 'The name field is required.']);
     }
@@ -73,7 +73,7 @@ class ProfileTest extends TestCase
     public function test_email_is_required(): void
     {
         Sanctum::actingAs(User::factory()->create());
-        $response = $this->from('/profile')->postJson('/api/profile');
+        $response = $this->postJson('/api/profile');
 
         $response->assertInvalid(['email' => 'The email field is required.']);
     }
@@ -81,7 +81,7 @@ class ProfileTest extends TestCase
     public function test_email_must_be_a_valid_email_address(): void
     {
         Sanctum::actingAs(User::factory()->create());
-        $response = $this->from('/profile')->postJson('/api/profile', [
+        $response = $this->postJson('/api/profile', [
             'email' => 'test',
         ]);
 

@@ -41,42 +41,42 @@ class SignUpTest extends TestCase
 
     public function test_name_is_required(): void
     {
-        $response = $this->from('/signup')->postJson('/api/signup');
+        $response = $this->postJson('/api/signup');
 
         $response->assertInvalid(['name' => 'The name field is required.']);
     }
 
     public function test_email_is_required(): void
     {
-        $response = $this->from('/signup')->postJson('/api/signup');
+        $response = $this->postJson('/api/signup');
 
         $response->assertInvalid(['email' => 'The email field is required.']);
     }
 
     public function test_email_must_be_a_valid_email(): void
     {
-        $response = $this->from('/signup')->postJson('/api/signup', ['email' => 'test']);
+        $response = $this->postJson('/api/signup', ['email' => 'test']);
 
         $response->assertInvalid(['email' => 'The email field must be a valid email address.']);
     }
 
     public function test_password_is_required(): void
     {
-        $response = $this->from('/signup')->postJson('/api/signup');
+        $response = $this->postJson('/api/signup');
 
         $response->assertInvalid(['password' => 'The password field is required.']);
     }
 
     public function test_password_confirmation_is_required(): void
     {
-        $response = $this->from('/signup')->postJson('/api/signup');
+        $response = $this->postJson('/api/signup');
 
         $response->assertInvalid(['password_confirmation' => 'The password confirmation field is required.']);
     }
 
     public function test_password_confirmation_must_be_equal_than_the_password(): void
     {
-        $response = $this->from('/signup')->postJson('/api/signup', [
+        $response = $this->postJson('/api/signup', [
             'password' => '1234',
             'password_confirmation' => '1111',
         ]);
@@ -90,7 +90,7 @@ class SignUpTest extends TestCase
             'email' => 'test@example.com',
         ]);
 
-        $response = $this->from('/signup')->postJson('/api/signup', [
+        $response = $this->postJson('/api/signup', [
             'name' => 'John Doe',
             'email' => 'test@example.com',
             'password' => '1234',
