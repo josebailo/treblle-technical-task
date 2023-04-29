@@ -3,21 +3,14 @@
 namespace App\Http\Controllers\Web\SignIn;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\LoginRequest;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
-    public function __invoke(Request $request): RedirectResponse
+    public function __invoke(LoginRequest $request): RedirectResponse
     {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required|string',
-            'remember' => 'nullable|boolean',
-        ]);
-
-        if (Auth::attempt($request->only('email', 'password'), $request->remember ?? false)) {
+        if ($request->authenticate()) {
             return redirect()->route('profile');
         }
 

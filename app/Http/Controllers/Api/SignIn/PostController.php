@@ -3,21 +3,14 @@
 namespace App\Http\Controllers\Api\SignIn;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\LoginRequest;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
-    public function __invoke(Request $request): JsonResponse
+    public function __invoke(LoginRequest $request): JsonResponse
     {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required|string',
-            'remember' => 'nullable|boolean',
-        ]);
-
-        if (Auth::attempt($request->only('email', 'password'), $request->remember ?? false)) {
+        if ($request->authenticate()) {
             return response()->json(['user' => $request->user()]);
         }
 
