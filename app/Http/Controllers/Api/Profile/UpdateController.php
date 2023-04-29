@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\Web\Profile;
+namespace App\Http\Controllers\Api\Profile;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProfileRequest;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\JsonResponse;
 
 class UpdateController extends Controller
 {
-    public function __invoke(ProfileRequest $request): RedirectResponse
+    public function __invoke(ProfileRequest $request): JsonResponse
     {
         $request->user()->update($request->validated());
 
-        return redirect()->route('profile');
+        return response()->json();
     }
 }
