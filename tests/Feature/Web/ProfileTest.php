@@ -4,6 +4,7 @@ namespace Tests\Feature\Web;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Inertia\Testing\AssertableInertia;
 use Tests\TestCase;
 
 class ProfileTest extends TestCase
@@ -99,5 +100,12 @@ class ProfileTest extends TestCase
         $response = $this->post('/profile');
 
         $response->assertRedirectToRoute('signin');
+    }
+
+    public function test_profile_page_renders_inertia_profile_page_component()
+    {
+        $this->actingAs(User::factory()->create())
+            ->get(route('profile'))
+            ->assertInertia(fn (AssertableInertia $page) => $page->component('Profile'));
     }
 }

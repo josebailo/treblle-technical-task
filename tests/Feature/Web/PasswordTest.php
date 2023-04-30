@@ -5,6 +5,7 @@ namespace Tests\Feature\Web;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
+use Inertia\Testing\AssertableInertia;
 use Tests\TestCase;
 
 class PasswordTest extends TestCase
@@ -51,5 +52,12 @@ class PasswordTest extends TestCase
 
         $response->assertRedirectToRoute('password')
             ->assertInvalid(['new_password' => 'The new password field confirmation does not match.']);
+    }
+
+    public function test_password_page_renders_inertia_password_page_component()
+    {
+        $this->actingAs(User::factory()->create())
+            ->get(route('password'))
+            ->assertInertia(fn (AssertableInertia $page) => $page->component('Password'));
     }
 }

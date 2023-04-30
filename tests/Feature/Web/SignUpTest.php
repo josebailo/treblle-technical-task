@@ -5,6 +5,7 @@ namespace Tests\Feature\Web;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
+use Inertia\Testing\AssertableInertia;
 use Tests\TestCase;
 
 class SignUpTest extends TestCase
@@ -113,5 +114,11 @@ class SignUpTest extends TestCase
 
         $response->assertRedirectToRoute('signup')
             ->assertInvalid(['email' => 'The email has already been taken.']);
+    }
+
+    public function test_sign_up_page_renders_inertia_sign_up_page_component()
+    {
+        $this->get(route('signup'))
+            ->assertInertia(fn (AssertableInertia $page) => $page->component('SignUp'));
     }
 }

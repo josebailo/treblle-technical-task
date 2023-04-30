@@ -5,6 +5,7 @@ namespace Tests\Feature\Web;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
+use Inertia\Testing\AssertableInertia;
 use Tests\TestCase;
 
 class SignInTest extends TestCase
@@ -105,5 +106,11 @@ class SignInTest extends TestCase
         $response = $this->post(route('signout'));
 
         $response->assertRedirectToRoute('signin');
+    }
+
+    public function test_sign_in_page_renders_inertia_sign_in_page_component()
+    {
+        $this->get(route('signin'))
+            ->assertInertia(fn (AssertableInertia $page) => $page->component('SignIn'));
     }
 }
