@@ -10,9 +10,8 @@ class IndexController extends Controller
 {
     public function __invoke(): Response
     {
-        $tokens = auth()->user()->tokens()->get();
         return Inertia::render('Tokens', [
-            'tokens' => $tokens,
+            'tokens' => auth()->user()->tokens()->get(),
             'newToken' => session()->get('newToken'),
         ]);
     }
