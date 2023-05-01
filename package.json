@@ -25,6 +25,7 @@
         "extends": "./node_modules/standard/eslintrc.json"
     },
     "dependencies": {
+        "@heroicons/vue": "^2.0.17",
         "@inertiajs/vue3": "^1.0.3",
         "vue": "^3.2.47"
     }
