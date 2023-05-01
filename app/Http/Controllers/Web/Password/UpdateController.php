@@ -13,6 +13,6 @@ class UpdateController extends Controller
     {
         $request->user()->update(['password' => Hash::make($request->new_password)]);
 
-        return redirect()->route('password');
+        return redirect()->route('password')->with('success', __('app.password_updated'));
     }
 }

@@ -12,6 +12,6 @@ class UpdateController extends Controller
     {
         $request->user()->update($request->validated());
 
-        return redirect()->route('profile');
+        return redirect()->route('profile')->with('success', __('app.profile_updated'));
     }
 }
