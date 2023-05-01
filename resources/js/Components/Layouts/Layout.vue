@@ -18,7 +18,7 @@
 
 <template>
   <header class="bg-white shadow">
-    <div class="container mx-auto py-3 flex justify-between items-center">
+    <div class="container mx-auto px-2 py-3 flex justify-between items-center">
       <h1 class="text-blue-800 text-3xl font-bold">
         <Link href="/">Treblle Task</Link>
       </h1>
@@ -37,7 +37,7 @@
     </div>
   </header>
 
-  <main class="container mx-auto mt-5">
+  <main class="container mx-auto mt-5 px-2">
     <Alert v-if="flash.success && showSuccessMessage" type="success" @close="showSuccessMessage = false">{{ flash.success }}</Alert>
     <Alert v-if="flash.error && showErrorMessage" type="error" @close="showErrorMessage = false">{{ flash.error }}</Alert>
 
