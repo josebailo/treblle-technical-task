@@ -11,7 +11,7 @@ class PostController extends Controller
     public function __invoke(SignInRequest $request): RedirectResponse
     {
         if ($request->authenticate()) {
-            return redirect()->route('profile');
+            return redirect()->route('home');
         }
 
         return back()->withErrors([

@@ -2,9 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return Inertia\Inertia::render('Welcome');
-})->name('home');
+Route::get('/', App\Http\Controllers\Web\HomeController::class)->name('home');
 
 Route::namespace(App\Http\Controllers\Web\SignIn::class)->group(function () {
     Route::middleware('guest')->group(function () {

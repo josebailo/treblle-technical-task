@@ -23,7 +23,7 @@ class SignInTest extends TestCase
             'password' => '1234',
         ]);
 
-        $response->assertRedirectToRoute('profile');
+        $response->assertRedirectToRoute('home');
         $this->assertAuthenticatedAs($user);
     }
 
