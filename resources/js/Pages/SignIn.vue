@@ -36,7 +36,7 @@
       <label for="remember" class="block">Remember me</label>
     </div>
     <div class="mt-5 text-right">
-      <Button type="submit">Log in</Button>
+      <Button type="submit">Sign in</Button>
     </div>
   </Form>
 </template>
