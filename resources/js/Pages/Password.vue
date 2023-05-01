@@ -3,6 +3,7 @@
   import Error from '../Components/Forms/Error.vue'
   import Form from '../Components/Forms/Form.vue'
   import Input from '../Components/Forms/Input.vue'
+  import PageHeader from '../Components/PageHeader.vue'
   import { useForm } from '@inertiajs/vue3'
 
   const form = useForm({
@@ -18,7 +19,8 @@
 
 <template>
   <Form @submit.prevent="submit">
-    <div>
+    <PageHeader>Change password</PageHeader>
+    <div class="mt-5">
       <label for="password" class="block">Password</label>
       <Input type="password" id="password" v-model="form.password" class="mt-2" required />
       <Error v-if="form.errors.password" class="mt-2">{{ form.errors.password }}</Error>

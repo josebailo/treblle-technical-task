@@ -4,6 +4,7 @@
   import Error from '../Components/Forms/Error.vue'
   import Form from '../Components/Forms/Form.vue'
   import Input from '../Components/Forms/Input.vue'
+  import PageHeader from '../Components/PageHeader.vue'
   import { useForm } from '@inertiajs/vue3'
 
   const form = useForm({
@@ -19,7 +20,8 @@
 
 <template>
   <Form @submit.prevent="submit">
-    <div>
+    <PageHeader>Sign in</PageHeader>
+    <div class="mt-5">
       <label for="email" class="block">Email</label>
       <Input type="email" id="email" v-model="form.email" class="mt-2" required />
       <Error v-if="form.errors.email" class="mt-2">{{ form.errors.email }}</Error>
