@@ -22,7 +22,7 @@ describe('Profile component', () => {
                 },
             },
         })
-        const submitButton = screen.getByText(/update/i)
+        const submitButton = screen.getByRole('button')
         const nameInput = screen.getByLabelText(/name/i)
         const emailInput = screen.getByLabelText(/email/i)
 

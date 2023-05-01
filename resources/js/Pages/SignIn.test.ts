@@ -10,7 +10,7 @@ describe('SignIn component', () => {
     test('does not allow to do submit until the fields are filled', async () => {
         const mockSubmit = vi.fn()
         render(SignIn, { global: { mocks: { submit: mockSubmit } } })
-        const submitButton = screen.getByText(/log in/i)
+        const submitButton = screen.getByRole('button')
         await fireEvent.click(submitButton)
         expect(mockSubmit).not.toHaveBeenCalled()
 
