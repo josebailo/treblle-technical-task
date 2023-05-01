@@ -1,10 +1,19 @@
 <script setup lang="ts">
   import { Link } from '@inertiajs/vue3'
-  import { User } from '../../types'
+  import { ref, watch } from 'vue'
+  import { FlashMessages, User } from '../../types'
+  import Alert from '../Alert.vue'
 
-  const { user } = defineProps<{
+  const props = defineProps<{
+    flash: FlashMessages
     user: User
   }>()
+
+  const showSuccessMessage = ref(false)
+  const showErrorMessage = ref(false)
+
+  watch(() => props.flash.success, () => showSuccessMessage.value = true)
+  watch(() => props.flash.error, () => showErrorMessage.value = true)
 </script>
 
 <template>
@@ -17,6 +26,7 @@
         <template v-if="user">
           <Link href="/profile">Profile</Link>
           <Link href="/password">Change password</Link>
+          <Link href="/tokens">API Tokens</Link>
           <Link href="/signout" method="post" as="button">Sign out</Link>
         </template>
         <template v-else>
@@ -26,7 +36,11 @@
       </div>
     </div>
   </header>
+
   <main class="container mx-auto mt-5">
+    <Alert v-if="flash.success && showSuccessMessage" type="success" @close="showSuccessMessage = false">{{ flash.success }}</Alert>
+    <Alert v-if="flash.error && showErrorMessage" type="error" @close="showErrorMessage = false">{{ flash.error }}</Alert>
+
     <slot />
   </main>
 </template>

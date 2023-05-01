@@ -30,4 +30,11 @@ Route::middleware('auth')->group(function () {
         Route::get('password', EditController::class)->name('password');
         Route::post('password', UpdateController::class);
     });
+
+    Route::namespace(App\Http\Controllers\Web\Tokens::class)->group(function () {
+        Route::get('tokens', IndexController::class)->name('tokens');
+        Route::get('tokens/new', CreateController::class)->name('tokens.create');
+        Route::post('tokens', StoreController::class)->name('tokens.store');
+        Route::delete('tokens/{token}', DestroyController::class)->name('tokens.destroy');
+    });
 });
