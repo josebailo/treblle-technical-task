@@ -47,6 +47,13 @@
               >
                 <div class="px-1 py-1">
                   <MenuItem v-slot="{ active }">
+                    <Link href="/" :class="[active ? 'bg-blue-500 text-white' : 'text-gray-900', 'group flex w-full items-center rounded-md px-2 py-2 text-sm']">
+                      Home
+                    </Link>
+                  </MenuItem>
+                </div>
+                <div class="px-1 py-1">
+                  <MenuItem v-slot="{ active }">
                     <Link href="/profile" :class="[active ? 'bg-blue-500 text-white' : 'text-gray-900', 'group flex w-full items-center rounded-md px-2 py-2 text-sm']">
                       Update profile
                     </Link>
