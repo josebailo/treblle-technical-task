@@ -30,8 +30,8 @@
           <Link href="/signout" method="post" as="button">Sign out</Link>
         </template>
         <template v-else>
-          <Link href="/signin">Sign in</Link>
-          <Link href="/signup">Sign up</Link>
+          <Link href="/signin" class="hover:text-blue-700">Sign in</Link>
+          <Link href="/signup" class="hover:text-blue-700">Sign up</Link>
         </template>
       </div>
     </div>
